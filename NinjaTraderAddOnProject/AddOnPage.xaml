@@ -51,7 +51,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- ACCOUNT SECTION -->
-                <TextBlock Text="Dave Hey" Style="{StaticResource FontLabel}" FontWeight="Bold">
+                <TextBlock Text="Account" Style="{StaticResource FontLabel}" FontWeight="Bold">
                     <TextBlock.Margin>
                         <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Right="{StaticResource MarginBase}" Bottom="0" />
                     </TextBlock.Margin>
