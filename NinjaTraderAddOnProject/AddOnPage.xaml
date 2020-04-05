@@ -1,0 +1,304 @@
+﻿<t:NTTabPage	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:t="clr-namespace:NinjaTrader.Gui.Tools;assembly=NinjaTrader.Gui"          
+		xmlns:system="clr-namespace:System;assembly=mscorlib" 
+		xmlns:TradePerformance="clr-namespace:NinjaTrader.Gui.TradePerformance;assembly=NinjaTrader.Gui" 
+		xmlns:AccountData="clr-namespace:NinjaTrader.Gui.AccountData;assembly=NinjaTrader.Gui" 
+		xmlns:AtmStrategy="clr-namespace:NinjaTrader.Gui.NinjaScript.AtmStrategy;assembly=NinjaTrader.Gui"
+        x:Class="NinjaTraderAddOnProject.AddOnPage" >
+    <Grid Background="Transparent">
+        <!-- Define our layout as two columns. Left side will be all of our controls. Right side will be our output box -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="55*"/>
+            <ColumnDefinition Width="45*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left side controls -->
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Grid Background="Transparent">
+                <Grid.RowDefinitions>
+                    <!-- ACCOUNT SECTION (0-4)-->
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <!-- DATA SECTION (5-9) -->
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <!-- ORDERS SECTION (10-15) -->
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <!-- MISC SECTION (16-19) -->
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- ACCOUNT SECTION -->
+                <TextBlock Text="Dave Hey" Style="{StaticResource FontLabel}" FontWeight="Bold">
+                    <TextBlock.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Right="{StaticResource MarginBase}" Bottom="0" />
+                    </TextBlock.Margin>
+                </TextBlock>
+                <t:AccountSelector		x:Name="accountSelector" Grid.Row="1">
+                    <t:AccountSelector.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource PaddingColumn}" Bottom="0" Right="{StaticResource MarginBase}" />
+                    </t:AccountSelector.Margin>
+                </t:AccountSelector>
+                <!-- Buttons for account values/executions/orders -->
+                <Button x:Name="acctValuesButton"		Grid.Row="2"	Grid.Column="0" Content="Account Values" PreviewMouseDown="OnButtonClick" >
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Right="0" Bottom="0" />
+                    </Button.Margin>
+                </Button>
+                <Button x:Name="acctExecButton"			Grid.Row="2"	Grid.Column="1" Content="Account Executions" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource MarginBase}"/>
+                    </Button.Margin>
+                </Button>
+                <Button x:Name="acctOrdersButton"		Grid.Row="2"	Grid.Column="2" Content="Account Orders" PreviewMouseDown="OnButtonClick" >
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource MarginBase}" Right="{StaticResource MarginBase}"/>
+                    </Button.Margin>
+                </Button>
+                <!-- Buttons for account positions/strategies -->
+                <Button x:Name="acctPosButton"			Grid.Row="3"	Grid.Column="0" Content="Account Positions" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Right="0" Bottom="0" />
+                    </Button.Margin>
+                </Button>
+                <Button x:Name="acctStratButton"		Grid.Row="3"	Grid.Column="1" Content="Account Strategies" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource MarginBase}"/>
+                    </Button.Margin>
+                </Button>
+                <!-- Buttons for OnAccountItem/StatusUpdate -->
+                <Button x:Name="onAccountItemUpdateButton"		Grid.Row="4"	Grid.Column="0" Content="OnAccountItemUpdate" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Right="0" Bottom="{StaticResource MarginBase}" />
+                    </Button.Margin>
+                </Button>
+                <Button x:Name="onAccountStatusUpdateButton"			Grid.Row="4"	Grid.Column="1" Content="OnAccountStatusUpdate" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource MarginBase}" Right="0" Bottom="{StaticResource MarginBase}"/>
+                    </Button.Margin>
+                </Button>
+
+                <!-- DATA SECTION -->
+                <TextBlock Text="Data Access" Style="{StaticResource FontLabel}" FontWeight="Bold" Grid.Row="5" Grid.Column="0">
+                    <TextBlock.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Right="{StaticResource MarginBase}" Bottom="0" />
+                    </TextBlock.Margin>
+                </TextBlock>
+                <!-- Instrument Selector/Interval Selector/DaysBack -->
+                <t:InstrumentSelector	x:Name="instrumentSelector" Grid.Row="6" Grid.Column="0" LastUsedGroup="AddOnFramework" InstrumentChanged="OnInstrumentChanged">
+                    <t:InstrumentSelector.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource PaddingColumn}" Bottom="0"/>
+                    </t:InstrumentSelector.Margin>
+                </t:InstrumentSelector>
+                <Grid Background="Transparent" Grid.Row="6"  Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <t:IntervalSelector		x:Name="intervalSelector" Grid.Column="0" HorizontalAlignment="Left" IntervalChanged="OnIntervalChanged">
+                        <t:IntervalSelector.Margin>
+                            <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource PaddingColumn}" Bottom="0"/>
+                        </t:IntervalSelector.Margin>
+                    </t:IntervalSelector>
+                    <TextBlock Text="Days" Style="{StaticResource FontLabel}" Grid.Column="1" HorizontalAlignment="Right">
+                        <TextBlock.Margin>
+                            <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource PaddingColumn}"/>
+                        </TextBlock.Margin>
+                    </TextBlock>
+                    <t:NumericTextBox x:Name="daysBackSelector"	Text="5" ValueType="{x:Type system:Int32}" Width="50" Grid.Column="2">
+                        <t:NumericTextBox.Margin>
+                            <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource PaddingColumn}" Right="{StaticResource MarginBase}"/>
+                        </t:NumericTextBox.Margin>
+                    </t:NumericTextBox>
+                </Grid>
+                <!-- Request Data Buttons -->
+                <Button x:Name="requestDataButton"		Grid.Row="7"	Grid.Column="0" Content="Request Data" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Right="0" Bottom="0" />
+                    </Button.Margin>
+                </Button>
+                <Button x:Name="realtimeDataButton"			Grid.Row="7"	Grid.Column="1" Content="Real-Time Data" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource MarginBase}"/>
+                    </Button.Margin>
+                </Button>
+                <Button x:Name="fundamentalDataButton"		Grid.Row="7"	Grid.Column="2" Content="Fundamental Data" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource MarginBase}" Right="{StaticResource MarginBase}"/>
+                    </Button.Margin>
+                </Button>
+                <!-- Market Data -->
+                <TextBlock Text="Market Data" Style="{StaticResource FontLabel}" HorizontalAlignment="Right" Grid.Row="8" Grid.Column="0">
+                    <TextBlock.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Bottom="0" />
+                    </TextBlock.Margin>
+                </TextBlock>
+                <Button x:Name="marketDataButton"		Grid.Row="8"	Grid.Column="1" Content="Subscription" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource MarginBase}" Right="0" Bottom="0" />
+                    </Button.Margin>
+                </Button>
+                <Button x:Name="marketDataSnapshotButton"		Grid.Row="8"	Grid.Column="2" Content="Snapshot" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource MarginBase}" Right="{StaticResource MarginBase}" Bottom="0" />
+                    </Button.Margin>
+                </Button>
+                <!-- Market Depth -->
+                <TextBlock Text="Market Depth" Style="{StaticResource FontLabel}" HorizontalAlignment="Right" Grid.Row="9" Grid.Column="0">
+                    <TextBlock.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Bottom="0" />
+                    </TextBlock.Margin>
+                </TextBlock>
+                <Button x:Name="marketDepthAskButton"		Grid.Row="9"	Grid.Column="1" Content="Ask Ladder" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource MarginBase}" Right="0" Bottom="0" />
+                    </Button.Margin>
+                </Button>
+                <Button x:Name="marketDepthBidButton"		Grid.Row="9"	Grid.Column="2" Content="Bid Ladder" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource MarginBase}" Right="{StaticResource MarginBase}" Bottom="0" />
+                    </Button.Margin>
+                </Button>
+
+                <!-- ORDERS SECTION -->
+                <!-- section label -->
+                <TextBlock Text="Orders" Style="{StaticResource FontLabel}" FontWeight="Bold" Grid.Row="10" Grid.Column="0">
+                    <TextBlock.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Right="{StaticResource MarginBase}" Bottom="0" />
+                    </TextBlock.Margin>
+                </TextBlock>
+                <!-- Controls label -->
+                <TextBlock Text="Quantity" Style="{StaticResource FontLabel}" Grid.Row="11" Grid.Column="0">
+                    <TextBlock.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Bottom="0" />
+                    </TextBlock.Margin>
+                </TextBlock>
+                <TextBlock Text="TIF" Style="{StaticResource FontLabel}" Grid.Row="11" Grid.Column="1">
+                    <TextBlock.Margin>
+                        <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource MarginBase}" Bottom="0" />
+                    </TextBlock.Margin>
+                </TextBlock>
+                <TextBlock Text="ATM Strategy" Style="{StaticResource FontLabel}" Grid.Row="11" Grid.Column="2">
+                    <TextBlock.Margin>
+                        <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource MarginBase}" Right="{StaticResource MarginBase}" Bottom="0" />
+                    </TextBlock.Margin>
+                </TextBlock>
+                <!-- Quantity/TIF/ATM selectors -->
+                <t:QuantityUpDown x:Name="qudSelector"  Value="1" Grid.Row="12" Grid.Column="0">
+                    <t:QuantityUpDown.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginControl}" Bottom="0" />
+                    </t:QuantityUpDown.Margin>
+                </t:QuantityUpDown>
+                <t:TifSelector x:Name="tifSelector"     Grid.Row="12" Grid.Column="1">
+                    <t:TifSelector.Margin>
+                        <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource MarginControl}" Right="0" Bottom="0" />
+                    </t:TifSelector.Margin>
+                </t:TifSelector>
+                <AtmStrategy:AtmStrategySelector x:Name="atmStrategySelector" LinkedQuantity="{Binding ElementName=qudSelector, Path=Value, Mode=OneWay}" Grid.Row="12" Grid.Column="2">
+                    <AtmStrategy:AtmStrategySelector.Margin>
+                        <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource MarginControl}" Right="{StaticResource MarginBase}" Bottom="0" />
+                    </AtmStrategy:AtmStrategySelector.Margin>
+                </AtmStrategy:AtmStrategySelector>
+                <!-- Order Buttons -->
+                <Button x:Name="buyMarketButton"		Grid.Row="13"	Grid.Column="0" Content="Buy Market" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Right="0" Bottom="0" />
+                    </Button.Margin>
+                </Button>
+                <Button x:Name="sellMarketButton"		Grid.Row="13"	Grid.Column="1" Content="Sell Market" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Right="0" Bottom="0" />
+                    </Button.Margin>
+                </Button>
+                <Button x:Name="frameworkManagedButton"		Grid.Row="13"	Grid.Column="2" Content="Framework Managed" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Right="{StaticResource MarginBase}" Bottom="0" />
+                    </Button.Margin>
+                </Button>
+                <!-- Order Events Buttons-->
+                <Button x:Name="onOrderUpdateButton"		Grid.Row="14"	Grid.Column="0" Content="OnOrderUpdate" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Right="0" Bottom="0" />
+                    </Button.Margin>
+                </Button>
+                <Button x:Name="onExecutionUpdateButton"		Grid.Row="14"	Grid.Column="1" Content="OnExecutionUpdate" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Right="0" Bottom="0" />
+                    </Button.Margin>
+                </Button>
+                <Button x:Name="onPositionUpdateButton"		Grid.Row="14"	Grid.Column="2" Content="OnPositionUpdate" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Right="{StaticResource MarginBase}" Bottom="0" />
+                    </Button.Margin>
+                </Button>
+                <!-- Order grid -->
+                <AccountData:OrderGrid  BorderBrush="{StaticResource BorderThinBrush}" Height="160" VerticalAlignment="Top" BorderThickness="1" Grid.Row="15" Grid.ColumnSpan="4">
+                    <AccountData:OrderGrid.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Right="{StaticResource MarginBase}" Bottom="0" />
+                    </AccountData:OrderGrid.Margin>
+                </AccountData:OrderGrid>
+
+                <!-- MISC SECTION -->
+                <TextBlock Text="Misc." Style="{StaticResource FontLabel}" FontWeight="Bold" Grid.Row="16" Grid.Column="0">
+                    <TextBlock.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Bottom="0" Right="{StaticResource MarginBase}" />
+                    </TextBlock.Margin>
+                </TextBlock>
+                <Button x:Name="connectKinetickEODButton"		Grid.Row="17"	Grid.Column="0" Content="Connect Kinetick EOD" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Right="0" Bottom="0" />
+                    </Button.Margin>
+                </Button>
+                <Button x:Name="connectionInfoButton"			Grid.Row="17"	Grid.Column="1" Content="Connection Info" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource MarginBase}"/>
+                    </Button.Margin>
+                </Button>
+                <Button x:Name="onConnectionStatusUpdateButton"			Grid.Row="17"	Grid.Column="2" Content="OnConnectionStatus" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource MarginBase}" Right="{StaticResource MarginBase}"/>
+                    </Button.Margin>
+                </Button>
+                <Button x:Name="onSimulationAccountResetButton"			Grid.Row="18"	Grid.Column="0" Content="OnSimulationAccountReset" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Bottom="{StaticResource MarginBase}"/>
+                    </Button.Margin>
+                </Button>
+                <Button x:Name="onNewsButton"			Grid.Row="18"	Grid.Column="1" Content="OnNews" PreviewMouseDown="OnButtonClick">
+                    <Button.Margin>
+                        <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource MarginBase}" Bottom="{StaticResource MarginBase}"/>
+                    </Button.Margin>
+                </Button>
+            </Grid>
+        </ScrollViewer>
+
+        <!-- Right side output box -->
+        <TextBox x:Name="outputBox" Margin="{Binding Source={StaticResource MarginBase}}" Grid.Column="1" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+    </Grid>
+</t:NTTabPage>
