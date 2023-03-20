@@ -1,6 +1,7 @@
 # NinjaTraderAddOnProject
 
-This is a C# source code project for an AddOn for NinjaTrader 8, a trading and market analysis platform. The AddOn shows how to use the NinjaTrader framework to create custom windows and tabs that can interact with NinjaTrader data and features. The AddOn consists of two classes: AddOnFramework and AddOnFrameworkWindowFactory. The first class defines the menu item that launches the AddOn window and handles the window creation and destruction events. The second class implements the INTTabFactory interface that allows creating custom tab pages for the AddOn window. The AddOn window contains two custom tab pages: Custom Tab 1 and Custom Tab 2. Custom Tab 1 displays a simple button that shows a message when clicked. Custom Tab 2 displays a chart control that plots a time series of random values.
+This is a C# source code project for an AddOn for NinjaTrader 8, a trading and market analysis platform. The AddOn shows how to use the NinjaTrader framework to create custom windows and tabs that can interact with NinjaTrader data and features. 
+The AddOn consists of two classes: `AddOnFramework` and `AddOnFrameworkWindowFactory`. The first class defines the menu item that launches the AddOn window and handles the window creation and destruction events. The second class implements the INTTabFactory interface that allows creating custom tab pages for the AddOn window. The AddOn window contains two custom tab pages: `Custom Tab 1` and `Custom Tab 2`. `Custom Tab 1` displays a simple button that shows a message when clicked. `Custom Tab 2` displays a chart control that plots a time series of random values.
 
 ## Prerequisites
 
