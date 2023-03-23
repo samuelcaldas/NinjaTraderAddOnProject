@@ -28,4 +28,4 @@ To use this AddOn, follow these steps:
 
 ## Author
 
-This AddOn is based on the sample code provided by NinjaTrader LLC and modified by Samuel Caldas. Some of the features of this AddOn are inspired by other third-party AddOns for NinjaTrader 8 . All credit goes to the original authors of these AddOns.
+This AddOn is based on the sample code provided by NinjaTrader LLC and modified by Samuel Caldas. Some of the features of this AddOn are inspired by other third-party AddOns for NinjaTrader 8. All credit goes to the original authors of these AddOns.
