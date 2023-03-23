@@ -1,4 +1,4 @@
-# NinjaTraderAddOnProject
+# NinjaTrader AddOn Project
 
 ## About
 
