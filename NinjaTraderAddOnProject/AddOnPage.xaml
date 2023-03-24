@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- Left side controls -->
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <Grid Background="Transparent">
                 <Grid.RowDefinitions>
                     <!-- ACCOUNT SECTION (0-4)-->
@@ -41,6 +41,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
@@ -51,11 +52,6 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- ACCOUNT SECTION -->
-                <TextBlock Text="Account" Style="{StaticResource FontLabel}" FontWeight="Bold">
-                    <TextBlock.Margin>
-                        <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Right="{StaticResource MarginBase}" Bottom="0" />
-                    </TextBlock.Margin>
-                </TextBlock>
                 <t:AccountSelector		x:Name="accountSelector" Grid.Row="1">
                     <t:AccountSelector.Margin>
                         <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource PaddingColumn}" Bottom="0" Right="{StaticResource MarginBase}" />
@@ -220,7 +216,7 @@
                         <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource MarginControl}" Right="0" Bottom="0" />
                     </t:TifSelector.Margin>
                 </t:TifSelector>
-                <AtmStrategy:AtmStrategySelector x:Name="atmStrategySelector" LinkedQuantity="{Binding ElementName=qudSelector, Path=Value, Mode=OneWay}" Grid.Row="12" Grid.Column="2">
+                <AtmStrategy:AtmStrategySelector x:Name="atmStrategySelector" LinkedQuantity="{Binding ElementName=qudSelector, Path=Value, Mode=TwoWay}" Grid.Row="12" Grid.Column="2">
                     <AtmStrategy:AtmStrategySelector.Margin>
                         <Thickness Left="{StaticResource MarginButtonLeft}" Top="{StaticResource MarginControl}" Right="{StaticResource MarginBase}" Bottom="0" />
                     </AtmStrategy:AtmStrategySelector.Margin>
@@ -258,7 +254,7 @@
                     </Button.Margin>
                 </Button>
                 <!-- Order grid -->
-                <AccountData:OrderGrid  BorderBrush="{StaticResource BorderThinBrush}" Height="160" VerticalAlignment="Top" BorderThickness="1" Grid.Row="15" Grid.ColumnSpan="4">
+                <AccountData:OrderGrid  BorderBrush="{StaticResource BorderThinBrush}" Height="160" VerticalAlignment="Top" BorderThickness="1" Grid.Row="15" Grid.ColumnSpan="3">
                     <AccountData:OrderGrid.Margin>
                         <Thickness Left="{StaticResource MarginBase}" Top="{StaticResource MarginBase}" Right="{StaticResource MarginBase}" Bottom="0" />
                     </AccountData:OrderGrid.Margin>
