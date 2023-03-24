@@ -1,5 +1,7 @@
 # NinjaTrader AddOn Project
 
+![Screenshot of NinjaTraderAddOnProject](res/addonframeworkexample.png)
+
 ## About
 
 This is a C# source code project for an AddOn for NinjaTrader 8, a trading and market analysis platform. The AddOn shows how to use the NinjaTrader framework to create custom windows and tabs that can interact with NinjaTrader data and features. 
